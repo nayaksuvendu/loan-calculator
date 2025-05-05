@@ -1,9 +1,2 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-body{
-  margin: auto;
-  max-width: 2560px;
-  position: relative;
-}
