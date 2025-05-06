@@ -2,7 +2,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useApp } from "./context/AppContext.jsx";
 import Home from "./pages/Home.jsx";
-// import About from "./pages/About";
+import About from "./pages/Aboutus.jsx";
 import ExchangeRates from "./pages/ExchangeRates.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -19,7 +19,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/exchange" element={<ExchangeRates />} />
-            {/* <Route path="/about" element={<About />} /> */}
+            <Route path="/about" element={<About />} />
             <Route path="/error" element={<ErrorPage />} />
             <Route path="*" element={<NotFound />} />  
         </Routes>
