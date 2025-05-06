@@ -1,7 +1,7 @@
 import ThemeToggle from './ThemeToggle.jsx'
 import { Link } from 'react-router-dom'
 import React, {  useState } from 'react';
-import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText} from '@mui/material';
+import { AppBar, Toolbar,IconButton, Drawer, List, ListItem, ListItemText} from '@mui/material';
 import {FiMenu} from 'react-icons/fi';
 
 
@@ -21,7 +21,7 @@ export default function Header({children}) {
  
   return (
     <>
-    <AppBar position="static" className="bg-blue-600 text-white">
+    <AppBar position="static" className="bg-blue-600 text-white mb-8">
       <Toolbar className="flex justify-between">
         <div className="text-white font-semibold text-lg">Loan Calculator</div>
 

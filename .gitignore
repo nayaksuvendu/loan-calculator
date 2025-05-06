@@ -25,11 +25,16 @@ dist-ssr
 src/pages/Home.jsx
 src/main.jsx
 src/pages/ExchangeRates.jsx
-src/output.css
+
 src/App.jsx
 src/theme.js
 src/pages/Aboutus.jsx
 src/pages/ErrorPage.jsx
 src/pages/NotFound.jsx
 src/App.jsx
+src/components/LoanCalc.jsx
+src/main.jsx
+src/main.jsx
+.env
+src/components/Header.jsx
 src/components/LoanCalc.jsx

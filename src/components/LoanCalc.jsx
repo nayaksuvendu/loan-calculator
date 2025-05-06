@@ -1,6 +1,20 @@
 import React, { useState } from 'react';
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+  Grid,
+  Paper,
+  colors,
+} from '@mui/material';
 import AmortizationTable from './AmortizationTable';
 import { useApp } from '../context/AppContext';
+import { green } from '@mui/material/colors';
 
 export default function LoanCalc() {
   const [amount, setAmount] = useState(100000);
@@ -11,9 +25,9 @@ export default function LoanCalc() {
   const { currency, setCurrency } = useApp();
 
   const calculateEMI = () => {
-    const P = parseFloat(amount);
-    const R = parseFloat(interest) / (12 * 100);
-    const N = parseInt(terms) * 12;
+    const P = Number(amount);
+    const R = interest / (12 * 100);
+    const N = terms * 12;
     const emiValue = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
     setEmi(emiValue.toFixed(2));
 
@@ -23,86 +37,100 @@ export default function LoanCalc() {
       const interestPayment = balance * R;
       const principalPayment = emiValue - interestPayment;
       balance -= principalPayment;
-      schedule.push({ month, principalPayment, interestPayment, balance });
+      schedule.push({
+        month,
+        principalPayment,
+        interestPayment,
+        balance: balance < 0 ? 0 : balance,
+      });
     }
     setAmortization(schedule);
   };
 
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-transparent dark:bg-gray-800 rounded-xl shadow-md mt-6">
-      <h2 className="text-2xl font-bold text-center mb-6 text-gray-700 dark:text-white">Loan EMI Calculator</h2>
+  const resetForm = () => {
+    setAmount(100000);
+    setInterest(4.5);
+    setTerms(5);
+    setEmi(null);
+    setAmortization([]);
+    setCurrency('USD');
+  };
 
-      <div className="grid md:grid-cols-3 gap-4 mb-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loan Amount</label>
-          <input
-            type="number"
+  return (
+    <Paper elevation={3} sx={{ p: 4, maxWidth: 900, mx: 'auto', my: 5 }}>
+      <Typography variant="h5" align="center" gutterBottom
+      sx={{ fontWeight: 'bold',mb:5 }}
+      >
+        Loan EMI Calculator
+      </Typography>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            label="Loan Amount"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Interest Rate (%)</label>
-          <input
             type="number"
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            label="Interest Rate (%)"
             value={interest}
             onChange={(e) => setInterest(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Term (Years)</label>
-          <input
             type="number"
+          />
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            label="Term (Years)"
             value={terms}
             onChange={(e) => setTerms(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+            type="number"
           />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
 
-      <div className="text-center mb-6">
-        <button
-          onClick={calculateEMI}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-md transition duration-300"
-        >
+      <Box mt={3} display="flex" justifyContent="center" gap={2}>
+        <Button variant="contained" color="primary" onClick={calculateEMI}>
           Calculate
-        </button>
-      </div>
+        </Button>
+        <Button variant="outlined" sx={{color:'red',borderColor:'red'}} onClick={resetForm}>
+          Reset
+        </Button>
+      </Box>
 
       {emi && (
-        <div className="text-center mb-4">
-          <p className="text-lg font-semibold text-green-700 dark:text-green-400">
-            Monthly EMI: {currency} {emi}
-          </p>
-        </div>
-      )}
+        <>
+          <Typography variant="h6" sx={{ mt: 4,'& strong': { color: '#00e676' }}}>
+            Monthly EMI: <strong sx={{ colors: green }} >${emi}</strong>
+          </Typography>
 
-      {emi && (
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Select Currency</label>
-          <select
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            className="w-full md:w-1/4 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-          >
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="INR">INR</option>
-            <option value="AUD">AUD</option>
-            <option value="CAD">CAD</option>
-          </select>
-        </div>
-      )}
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel>Currency</InputLabel>
+            <Select
+              value={currency}
+              label="Currency"
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <MenuItem value="USD">USD</MenuItem>
+              <MenuItem value="EUR">EUR</MenuItem>
+              <MenuItem value="INR">INR</MenuItem>
+              <MenuItem value="AUD">AUD</MenuItem>
+              <MenuItem value="CAD">CAD</MenuItem>
+            </Select>
+          </FormControl>
 
-      {amortization.length > 0 && (
-        <div className="mt-8">
-          <AmortizationTable schedule={amortization} currency={currency} />
-        </div>
+          <Box sx={{ mt: 4 }}>
+            <AmortizationTable schedule={amortization} currency={currency} />
+          </Box>
+        </>
       )}
-    </div>
+    </Paper>
   );
 }

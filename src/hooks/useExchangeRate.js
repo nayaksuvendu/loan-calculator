@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_KEY = 'daced0569e49df71b6d2e15e'; // Replace with actual key
+const API_KEY = import.meta.env.VITE_API_KEY ;
 
 export const useExchangeRate = (base = "USD") => {
   const [rates, setRates] = useState({});
