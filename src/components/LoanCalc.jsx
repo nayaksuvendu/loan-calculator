@@ -65,7 +65,7 @@ export default function LoanCalc() {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={4}>
+        <Grid >
           <TextField
             fullWidth
             label="Loan Amount"
@@ -75,7 +75,7 @@ export default function LoanCalc() {
           />
         </Grid>
 
-        <Grid item xs={12} sm={4}>
+        <Grid >
           <TextField
             fullWidth
             label="Interest Rate (%)"
@@ -85,7 +85,7 @@ export default function LoanCalc() {
           />
         </Grid>
 
-        <Grid item xs={12} sm={4}>
+        <Grid item >
           <TextField
             fullWidth
             label="Term (Years)"
