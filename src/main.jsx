@@ -9,8 +9,5 @@ createRoot(document.getElementById('root')).render(
     <AppProvider>
     <App/>
     </AppProvider>
-<<<<<<< HEAD
     </StrictMode>
-=======
->>>>>>> 372f9a9a3b0185881895656c5e568cde117d0a89
 )
