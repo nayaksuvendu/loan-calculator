@@ -27,6 +27,5 @@ src/main.jsx
 src/pages/ExchangeRates.jsx
 src/output.css
 src/App.jsx
-src/context/AppContext.jsx
 src/theme.js
 src/hooks/useExchangeRate.js
