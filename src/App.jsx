@@ -4,8 +4,8 @@ import { useApp } from "./context/AppContext.jsx";
 import Home from "./pages/Home.jsx";
 // import About from "./pages/About";
 import ExchangeRates from "./pages/ExchangeRates.jsx";
-// import NotFound from "./pages/NotFound";
-// import ErrorPage from "./pages/ErrorPage";
+import NotFound from "./pages/NotFound.jsx";
+import ErrorPage from "./pages/ErrorPage.jsx";
 import { getTheme } from "./theme.js";
 
 export default function App() {
@@ -19,9 +19,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/exchange" element={<ExchangeRates />} />
-            {/* <Route path="/about" element={<About />} />
+            {/* <Route path="/about" element={<About />} /> */}
             <Route path="/error" element={<ErrorPage />} />
-            <Route path="*" element={<NotFound />} />  */}
+            <Route path="*" element={<NotFound />} />  
         </Routes>
       </Router>
     </ThemeProvider>
