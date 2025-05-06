@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 src/pages/ExchangeRates.jsx
 
@@ -29,3 +30,17 @@ src/pages/ExchangeRates.jsx
 src/components/Header.jsx
 src/components/LoanCalc.jsx
 vite.config.js
+=======
+src/main.jsx
+src/pages/ExchangeRates.jsx
+
+src/App.jsx
+src/theme.js
+src/App.jsx
+src/components/LoanCalc.jsx
+src/main.jsx
+src/main.jsx
+.env
+src/components/Header.jsx
+src/components/LoanCalc.jsx
+>>>>>>> 372f9a9a3b0185881895656c5e568cde117d0a89
